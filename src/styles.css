@@ -33,13 +33,14 @@ body {
 .title {
     grid-row: 1/2;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #title {
     font-size:xx-large;
     color: white;
     align-content: center;
+    padding-left: 20px;
 }
 
 #menu > div > div > span {
@@ -55,6 +56,12 @@ body {
 }
 
 #navBar svg {
-    height: 20px;
-    width: 20px;
+    height: 17px;
+    width: 17px;
+}
+
+#projects > span {
+    font-size: large;
+    color: white;
+    padding-left: 20px;
 }
