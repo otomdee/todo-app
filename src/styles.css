@@ -65,3 +65,78 @@ body {
     color: white;
     padding-left: 20px;
 }
+
+#taskDialog {
+    border-radius: 10px;
+    height: 300px;
+    width: 300px;
+    background-color: #293341;
+    border: none;
+}
+
+#taskForm {
+    display: grid;
+    grid-template-rows: 3fr 1fr 1fr;
+    height: 100%;
+    color: white;
+}
+
+#dialogText {
+    grid-row: 1/2;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+}
+
+.titleInput {
+    grid-row: 1/2;
+}
+
+.descInput {
+    grid-row: 2/3;
+}
+
+.dateInput {
+    grid-row: 3/4;
+}
+
+#titleInput, #dateInput, #dialogText label {
+    display: inline;
+}
+
+#dialogText label, #dialogText input {
+    display: inline;
+}
+
+.priority span {
+    margin-right: 20px;
+}
+
+#taskDialogButtons {
+    grid-row: 3/4;
+    display: flex;
+    justify-content: center;
+}
+
+#taskSubmit {
+    height: 40px;
+    width: 100px;
+    font-size: large;
+}
+
+#mainPage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+}
+
+.inline {
+    display: inline;
+}
+
+.taskCard {
+    padding: 10px;
+    background-color: #293341;
+    border-radius: 10px;
+    height: 50px;
+}

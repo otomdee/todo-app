@@ -22,6 +22,7 @@ class Task {
         }
         addTask() {
             currentTasks.push(this);
+
         }
 }
 
@@ -41,4 +42,4 @@ function addProject(projectName) {
     currentProjects.push(project);
 }
 
-export {Task, Project, currentProjects, currentTasks};
+export {Task, Project, currentProjects, currentTasks, addProject};
