@@ -28,6 +28,7 @@ body {
 #mainPage {
     grid-column: 2/3;
     background-color: #111827;
+    color: white;
 }
 
 .title {
@@ -127,7 +128,9 @@ body {
 #mainPage {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(7, 1fr);
     padding: 20px;
+    gap: 20px;
 }
 
 .inline {
@@ -139,4 +142,23 @@ body {
     background-color: #293341;
     border-radius: 10px;
     height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.taskCard span {
+    font-size: large;
+}
+
+.highPriority {
+    color: red;
+}
+
+.midPriority {
+    color: yellow;
+}
+
+.lowPriority {
+    color: green;
 }

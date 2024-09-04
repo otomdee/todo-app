@@ -22,7 +22,6 @@ class Task {
         }
         addTask() {
             currentTasks.push(this);
-
         }
 }
 
