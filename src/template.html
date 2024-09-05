@@ -39,6 +39,7 @@
         </div>
 
         <div id="mainPage">
+            <div id="projectName"><span>Project: </span></div>
         </div>
         
         <dialog id="taskDialog">
@@ -75,6 +76,45 @@
             </form>
             
         </dialog>
+
+        <dialog id="changeDialog">
+
+            <form id="changeForm">    
+                <div id="changeText">
+                    <div class="titleInput">
+                        <label for="changeTitle">Title: </label>
+                        <input type="text" name="title" id="changeTitle" required>
+                    </div>
+                    <div class="descInput">
+                        <label for="changeDesc">Description: </label>
+                        <input type="text" name="description" id="changeDesc" required>
+                    </div>
+                    <div class="dateInput">
+                        <label for="changeDate">Due date:</label>
+                        <input type="date" name="date" id="changeDate">
+                    </div>
+                    
+                    <div  class="priority">
+                        <span>Priority: </span>
+                        <label for="changeLowPri">Low: </label>
+                        <input type="radio" name="changePriority" id="changeLowPri" value="low">
+                        <label for="changeMidPri">Medium: </label>
+                        <input type="radio" name="changePriority" id="changeMidPri" value="mid">
+                        <label for="changeHighPri">High: </label>
+                        <input type="radio" name="changePriority" id="changeHighPri" value="high">
+                    </div>      
+                </div>
+                
+                <div id="changeEdit">
+                    <button type="submit" id="changeSubmit">Edit</button>
+                </div>
+                <div id="changeDelete">
+                    <button>Delete Task</button>
+                </div>
+            </form>
+            
+        </dialog>
+
     </div>
 </body>
 </html>

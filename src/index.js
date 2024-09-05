@@ -2,7 +2,7 @@ import "./styles.css";
 import {Task, Project, currentProjects, currentTasks, addProject} from "./tasks.js";
 
 
-//addTask DOM dummy
+//show new task modal
 document.querySelector("#newTask").addEventListener("click", () => {
     document.querySelector("#taskDialog").showModal();
 })
@@ -20,8 +20,11 @@ document.querySelector("#taskDialog").addEventListener("click", e => {
 })
 
 
-//fxn render task
-function renderTask(task) {
+//fxn render list of tasks
+function renderTasks(tasks) {
+
+    tasks.forEach((task) => {
+    
     const card = document.createElement("div");
     const checkbox = document.createElement("input");
     const cardTitle = document.createElement("span");
@@ -54,15 +57,11 @@ function renderTask(task) {
 
 
     document.querySelector("#mainPage").append(card);
+    })
+    
 }
 
-//dummy tasks
-const mytask = new Task("bread", "buy bread", "2024-09-03", "low");
-renderTask(mytask);
-const task2 = new Task("paint", "get brush", "2024-09-03", "mid");
-renderTask(task2);
-
-//take modal input, create task with it, render project
+//take modal input, create task with it, render list of current tasks
 const form = document.querySelector("#taskForm");
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -74,7 +73,16 @@ form.addEventListener("submit", (event) => {
 
     const task = new Task (title.value, description.value, date.value, priority.value);
 
-    renderTask(task);
+    task.addTask();
+    renderTasks(currentTasks);
     form.reset();
     document.querySelector("#taskDialog").close();
 })
+
+//dummy tasks
+const mytask = new Task("bread", "buy bread", "2024-09-03", "low");
+const task2 = new Task("paint", "get brush", "2024-09-03", "mid");
+
+task2.addTask();
+mytask.addTask();
+renderTasks(currentTasks);
