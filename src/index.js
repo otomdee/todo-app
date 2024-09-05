@@ -1,5 +1,6 @@
 import "./styles.css";
 import {Task, Project, currentProjects, currentTasks, addProject} from "./tasks.js";
+import {editInfo} from "./changeTask.js";
 
 
 //show new task modal
@@ -19,9 +20,13 @@ document.querySelector("#taskDialog").addEventListener("click", e => {
     }
 })
 
+let highLightedTask; 
 
 //fxn render list of tasks
 function renderTasks(tasks) {
+
+    //clear current page
+    document.querySelector("#mainPage").innerHTML = "";
 
     tasks.forEach((task) => {
     
@@ -31,9 +36,10 @@ function renderTasks(tasks) {
     const cardDesc = document.createElement("span");
     const cardDuedate = document.createElement("span");
     const cardPriority = document.createElement("span");
+    const edit = document.createElement("button");
 
 
-    [checkbox, cardTitle, cardDesc, cardDuedate, cardPriority].forEach((item) => {
+    [checkbox, cardTitle, cardDesc, cardDuedate, cardPriority, edit].forEach((item) => {
         item.classList.add("inline");
         card.append(item);
     })
@@ -44,6 +50,8 @@ function renderTasks(tasks) {
     cardDesc.innerHTML = task.description;
     cardDuedate.innerHTML = task.dueDate;
     cardPriority.innerHTML = task.priority;
+    edit.innerHTML = "EDIT";
+
 
     if (task.priority === "high") {
         cardPriority.classList.add("highPriority");
@@ -55,11 +63,34 @@ function renderTasks(tasks) {
         cardPriority.classList.add("lowPriority");
     }
 
+    edit.addEventListener("click", () => {
+        highLightedTask = task;
+        document.querySelector("#changeDialog").showModal();
+    })
 
     document.querySelector("#mainPage").append(card);
-    })
-    
+    })   
 }
+
+document.querySelector("#changeForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    editInfo(highLightedTask);
+    document.querySelector("#changeForm").reset();
+    document.querySelector("#changeDialog").close()
+    renderTasks(currentTasks);
+})
+
+document.querySelector("#changeDialog").addEventListener("click", e => {
+    const dialogDimensions = document.querySelector("#changeDialog").getBoundingClientRect()
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+        document.querySelector("#changeDialog").close()
+    }
+})
 
 //take modal input, create task with it, render list of current tasks
 const form = document.querySelector("#taskForm");

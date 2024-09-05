@@ -1,5 +1,5 @@
 //edit task info
-function editInfo(task) {
+export function editInfo(task) {
     const title = document.querySelector("#changeTitle").value;
     const desc = document.querySelector("#changeDesc").value;
     const date = document.querySelector("#changeDate").value;
