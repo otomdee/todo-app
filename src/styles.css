@@ -178,3 +178,10 @@ body {
 .lowPriority {
     color: green;
 }
+
+.taskCard img {
+    height: 17px;
+    width: 17px;
+    align-self: center;
+    cursor: pointer;
+}

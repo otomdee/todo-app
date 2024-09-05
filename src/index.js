@@ -1,7 +1,7 @@
 import "./styles.css";
 import {Task, Project, currentProjects, currentTasks, addProject} from "./tasks.js";
 import {editInfo} from "./changeTask.js";
-
+import trashIcon from "./trash.svg";
 
 //show new task modal
 document.querySelector("#newTask").addEventListener("click", () => {
@@ -37,9 +37,10 @@ function renderTasks(tasks) {
     const cardDuedate = document.createElement("span");
     const cardPriority = document.createElement("span");
     const edit = document.createElement("button");
+    const trash = document.createElement("div");
+    const trashImg = document.createElement("img");
 
-
-    [checkbox, cardTitle, cardDesc, cardDuedate, cardPriority, edit].forEach((item) => {
+    [checkbox, cardTitle, cardDesc, cardDuedate, cardPriority, edit, trash].forEach((item) => {
         item.classList.add("inline");
         card.append(item);
     })
@@ -51,6 +52,8 @@ function renderTasks(tasks) {
     cardDuedate.innerHTML = task.dueDate;
     cardPriority.innerHTML = task.priority;
     edit.innerHTML = "EDIT";
+    trash.append(trashImg);
+    trashImg.src = trashIcon;
 
 
     if (task.priority === "high") {
@@ -68,8 +71,18 @@ function renderTasks(tasks) {
         document.querySelector("#changeDialog").showModal();
     })
 
+    trash.addEventListener("click", () => {
+        for (let i = 0; i < currentTasks.length; i++) {
+            if (currentTasks[i] === task) {
+                currentTasks.splice(i, 1);
+                card.remove();
+            }
+        }
+        renderTasks(currentTasks);
+    })
+
     document.querySelector("#mainPage").append(card);
-    })   
+    })
 }
 
 document.querySelector("#changeForm").addEventListener("submit", (event) => {
