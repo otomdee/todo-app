@@ -8,18 +8,6 @@ class Task {
         this.dueDate = dueDate;
         this.priority = priority;
     }
-        changeTitle(newTitle) {
-            this.title = newTitle;
-        }
-        changeDescription(newDescription) {
-            this.description = newDescription;
-        }
-        changeDate(newDate) {
-            this.dueDate = newDate;
-        }
-        changePriority(newPriority) {
-            this.priority = newPriority;
-        }
         addTask() {
             currentTasks.push(this);
         }
@@ -34,11 +22,10 @@ class Project {
     addTask(task) {
         this.tasksArray.push(task);
     }
+
+    addProject() {
+        currentProjects.push(this);
+    }
 }
 
-function addProject(projectName) {
-    const project = new Project(projectName, []);
-    currentProjects.push(project);
-}
-
-export {Task, Project, currentProjects, currentTasks, addProject};
+export {Task, Project, currentProjects, currentTasks};

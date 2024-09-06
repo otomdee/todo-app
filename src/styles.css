@@ -65,10 +65,23 @@ body {
     width: 17px;
 }
 
-#projects > span {
+#projects span {
     font-size: large;
     color: white;
     padding-left: 20px;
+}
+
+#projects svg {
+    height: 17px;
+    width: 17px;
+    align-self: center;
+    margin-left: 40px;
+}
+
+.projectsWrap {
+    height: auto;
+    display: flex;
+    align-items: center;
 }
 
 #taskDialog , #changeDialog {
@@ -183,5 +196,17 @@ body {
     height: 17px;
     width: 17px;
     align-self: center;
+    cursor: pointer;
+}
+
+#projectDialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.projectDiv {
+    padding: 10px;
+}
+
+.projectDiv:hover {
     cursor: pointer;
 }
