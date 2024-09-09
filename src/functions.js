@@ -1,13 +1,31 @@
 import trashIcon from "./trash.svg";
-import { currentTasks } from "./tasks.js";
 
-export let highLightedTask;
-//render task
-export function renderTasks(tasks) {
+export function renderProject(projects, currentTask, currentProject) {
+    const listDiv = document.querySelector("#projectList");
+    listDiv.innerHTML = "";
+    projects.forEach((item) => {
+        const div = document.createElement("div");
+        const span = document.createElement("span");
+        div.classList.add("projectDiv");
+        div.append(span);
+        span.innerHTML = item.title;
+
+        listDiv.append(div);
+
+        div.addEventListener("click", () => {
+            currentProject = item;
+            //renderTasks within the project
+            renderTasks(item.tasksArray, currentTask, currentProject);
+        })
+
+    })
+}
+
+export function renderTasks(array, currentTask, currentProject) {
     //clear current page
     document.querySelector("#mainPage").innerHTML = "";
 
-    tasks.forEach((task) => {
+    array.forEach((task) => {
     
     const card = document.createElement("div");
     const checkbox = document.createElement("input");
@@ -39,32 +57,31 @@ export function renderTasks(tasks) {
         cardPriority.classList.add("highPriority");
     }
     else if (task.priority === "mid") {
-        cardPriority.classList.add("midPriority")
+        cardPriority.classList.add("midPriority");
     }
     else if (task.priority === "low") {
         cardPriority.classList.add("lowPriority");
     }
 
     edit.addEventListener("click", () => {
-        highLightedTask = task;
+        currentTask = task;
         document.querySelector("#changeDialog").showModal();
     })
 
     trash.addEventListener("click", () => {
-        for (let i = 0; i < currentTasks.length; i++) {
-            if (currentTasks[i] === task) {
-                currentTasks.splice(i, 1);
+        for (let i = 0; i < currentProject.tasksArray.length; i++) {
+            if (currentProject.tasksArray[i] === task) {
+                currentProject.tasksArray.splice(i, 1);
                 card.remove();
             }
         }
-        renderTasks(currentTasks);
+        renderTasks(currentProject.tasksArray, currentTask, currentProject);
     })
 
     document.querySelector("#mainPage").append(card);
     })
 }
 
-//edit task info
 export function editInfo(task) {
     const title = document.querySelector("#changeTitle").value;
     const desc = document.querySelector("#changeDesc").value;
@@ -77,16 +94,16 @@ export function editInfo(task) {
     task.priority = priority;
 }
 
-export function renderProject(projects) {
-    const listDiv = document.querySelector("#projectList");
-    listDiv.innerHTML = "";
-    projects.forEach((item) => {
-        const div = document.createElement("div");
-        const span = document.createElement("span");
-        div.classList.add("projectDiv");
-        div.append(span);
-        span.innerHTML = item.title;
-
-        listDiv.append(div);
-    })
+export function modalBoundary(modal) {
+    modal.addEventListener("click", e => {
+        const dialogDimensions = modal.getBoundingClientRect()
+            if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+            ) {
+                modal.close()
+            }
+        })
 }

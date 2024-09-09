@@ -199,6 +199,10 @@ body {
     cursor: pointer;
 }
 
+#projectDialog {
+    border-radius: 10px;
+}
+
 #projectDialog::backdrop {
     background-color: rgba(0, 0, 0, 0.6);
 }
