@@ -1,5 +1,5 @@
 import "./styles.css";
-import { renderProject, renderTasks, editInfo, modalBoundary } from "./functions.js";
+import { renderProject, renderTasks, editInfo, modalBoundary, } from "./functions.js";
 
 //projects
 class Project {
@@ -14,12 +14,15 @@ class Project {
 }
 
 let currentProject;
-let currentTask = "empty";
+export let mainCurrentTask = "empty";
+export function setCurrentTask(value) {
+    mainCurrentTask = value; // Provide a setter function to update currentTask
+}
 
 const toDoProjects = [];
 const defaultProject = new Project("default", []);
 defaultProject.addToProjects(toDoProjects);
-renderProject(toDoProjects, currentTask, currentProject);
+renderProject(toDoProjects, mainCurrentTask, currentProject);
 
 currentProject = defaultProject;
 
@@ -40,7 +43,7 @@ projectForm.addEventListener("submit", (event) => {
        project.addToProjects(toDoProjects);
        projectForm.reset();
        projectDialog.close();
-       renderProject(toDoProjects, currentTask, currentProject);
+       renderProject(toDoProjects, mainCurrentTask, currentProject);
 })
 
 //create new task
@@ -75,7 +78,7 @@ form.addEventListener("submit", (event) => {
     const task = new Task (title.value, description.value, date.value, priority.value);
 
     task.addTask();
-    renderTasks(currentProject.tasksArray, currentTask, currentProject);
+    renderTasks(currentProject.tasksArray, mainCurrentTask, currentProject);
     form.reset();
     newTaskDialog.close();
 })
@@ -85,8 +88,8 @@ document.querySelector("#changeForm").addEventListener("submit", (event) => {
     event.preventDefault();
 
     //editInfo(currentTask);
-    editInfo(currentTask);
-    renderTasks(currentProject.tasksArray, currentTask, currentProject);
+    editInfo(mainCurrentTask);
+    renderTasks(currentProject.tasksArray, mainCurrentTask, currentProject);
     document.querySelector("#changeForm").reset();
     document.querySelector("#changeDialog").close()
 })

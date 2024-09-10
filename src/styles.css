@@ -209,8 +209,13 @@ body {
 
 .projectDiv {
     padding: 10px;
+    border-radius: 10px;
 }
 
 .projectDiv:hover {
     cursor: pointer;
+}
+
+.activeDiv {
+    background-color: #1e2a45;
 }

@@ -1,4 +1,5 @@
 import trashIcon from "./trash.svg";
+import { mainCurrentTask, setCurrentTask } from "./index.js";
 
 export function renderProject(projects, currentTask, currentProject) {
     const listDiv = document.querySelector("#projectList");
@@ -14,6 +15,11 @@ export function renderProject(projects, currentTask, currentProject) {
 
         div.addEventListener("click", () => {
             currentProject = item;
+            //change style to active class
+            document.querySelectorAll(".projectDiv").forEach((div) => {
+                div.classList.remove("activeDiv");
+            });
+            div.classList.add("activeDiv");
             //renderTasks within the project
             renderTasks(item.tasksArray, currentTask, currentProject);
         })
@@ -64,9 +70,10 @@ export function renderTasks(array, currentTask, currentProject) {
     }
 
     edit.addEventListener("click", () => {
-        currentTask = task;
+        setCurrentTask(task);
         document.querySelector("#changeDialog").showModal();
     })
+    modalBoundary(document.querySelector("#changeDialog"));
 
     trash.addEventListener("click", () => {
         for (let i = 0; i < currentProject.tasksArray.length; i++) {
